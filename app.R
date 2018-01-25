@@ -14,6 +14,9 @@ packages <- c("shiny", "plotly", "shinydashboard")
 
 reqPackages(packages)
 
+# Load data
+loadAdspendDB()
+
 ## UI
 ui <- dashboardPage(title = paste("Adspend Dashboard", version),
   dashboardHeader(),
