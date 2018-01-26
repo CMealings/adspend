@@ -1,0 +1,12 @@
+name: adspend
+title: adspend
+username:
+account: cmealings
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 262473
+bundleId: 1194213
+url: https://cmealings.shinyapps.io/adspend/
+when: 1516966344.25477
+asMultiple: FALSE
+asStatic: FALSE

@@ -27,7 +27,7 @@ loadAdspendDB <- function(path) {
     sheets <- excel_sheets(path)
     
     # Exclude extraneous sheets
-    sheets <- sheets[!sheets %in% c("Sheet2", "Sheet3", "Countries", "Asia Pacific Counts", "Africa Counts", "Latin America Counts", "Europe Counts", "MiddleEast Counts", "Template")]
+    sheets <- sheets[!sheets %in% c("Sheet2", "Sheet3", "Countries", "North America Counts", "Asia Pacific Counts", "Africa Counts", "Latin America Counts", "Europe Counts", "MiddleEast Counts", "Template")]
     
     # Read each sheet
     for (sht in sheets) {
@@ -61,12 +61,13 @@ loadAdspendDB <- function(path) {
   
   # Sheet name to dataframe
   dimnames(df)[[3]] <- sheet.names
+  names(mf) <- sheet.names
   
   assign("df", df, pos = parent.frame(n = 1))
   assign("mf", mf, pos = parent.frame(n = 1))
   
   # Load time
   end <- Sys.time() - start
-  cat("Adspend Database loaded in ", end)
+  cat("Adspend Database loaded in ", end, "\n")
   
 }

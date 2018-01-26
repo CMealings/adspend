@@ -1,5 +1,5 @@
 
-version <- 1.2
+version <- 1.1
 
 ## Dependencies
 scripts <- grep(".R$", list.files(paste0(getwd(), "/scripts/")), value = TRUE)
@@ -9,17 +9,14 @@ if (length(scripts) > 0) {
 }
 
 path <- c(data = "F:/Work/")
-warcStyle()
-regions <- c("Global", "Africa", "Asia-Pacific", "Europe", )
 
-packages <- c("shiny", "plotly", "shinydashboard", "shinyWidgets")
+packages <- c("shiny", "plotly", "shinydashboard")
 
 reqPackages(packages)
 
 library(shiny)
 library(shinydashboard)
 library(plotly)
-library(shinyWidgets)
 
 # Load data
 loadAdspendDB()
@@ -39,9 +36,7 @@ ui <- dashboardPage(title = paste("Adspend Dashboard", version),
                                 choices = c("Current prices",
                                            "Constant prices")),
                    
-                   checkboxInput("growth", "Show YoY Growth"),
-                   
-                   dropdownButton(checkboxGroupButtons())
+                   checkboxInput("growth", "Show YoY Growth")
                    ),
   dashboardBody(textOutput("test"))
 )
@@ -52,21 +47,7 @@ server <- function(input, output, session) {
   
   output$test <- renderText("Hulloooo")
   
-  output$plot <- renderPlotly({
-    
-    data <- chartData(df, mf, input$year, input$currency, input$metric, input$growth)
-    
-    ggplotly(
-      ggplot(data, aes(Year, value, fill = forcats::fct_rev(variable))) +
-        geom_bar(stat = "identity", width = .7) +
-        labs(x = meta$x.axis, y = meta$y.axis) +
-        ## WARC Styling
-        scale_fill_manual(values = rev(unlist(styles$col, use.names = FALSE)),
-                          name = meta$legend) +
-        theme(text=element_text(family = "Aktiv Grotesk Medium",
-                                colour = styles$col$main$col1))
-    )
-  })
+  
   
 }
 
